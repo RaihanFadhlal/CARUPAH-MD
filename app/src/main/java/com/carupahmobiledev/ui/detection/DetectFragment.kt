@@ -1,4 +1,4 @@
-package com.carupahmobiledev.ui.notifications
+package com.carupahmobiledev.ui.detection
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.carupahmobiledev.databinding.FragmentNotificationsBinding
+import com.carupahmobiledev.databinding.FragmentDetectBinding
 
-class NotificationsFragment : Fragment() {
+class DetectFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentDetectBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val detectViewModel =
+            ViewModelProvider(this).get(DetectViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentDetectBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textDashboard
+        detectViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
