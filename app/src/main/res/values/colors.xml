@@ -2,6 +2,7 @@
 <resources>
     <color name="I800">#FF000000</color>
     <color name="I400">#7C7C7C</color>
+    <color name="I200">#D8D8D8</color>
     <color name="I50">#FFFFFFFF</color>
 
     <color name="P800">#1E674A</color>

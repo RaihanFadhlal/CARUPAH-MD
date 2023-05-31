@@ -1,11 +1,16 @@
 <resources>
-    <string name="app_name">CarupahMobileDev</string>
+    <string name="app_name">Carupah</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Beranda</string>
     <string name="title_detect">Deteksi</string>
     <string name="title_location">Lokasi</string>
     <string name="title_profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="search_hint">Cari cara daur ulang sampah</string>
+    <string name="bs_button">Dimana Bank Sampah Terdekat Saya?</string>
+    <string name="du_button">Bagaimana Cara Mendaur Ulang Sampah Saya?</string>
+    <string name="track_rv">Tracking Pengelolaan Sampah Ku</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
