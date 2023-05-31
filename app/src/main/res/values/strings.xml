@@ -7,8 +7,10 @@
     <string name="title_profile">Profile</string>
 
     //Auth
-    <string name="title1">Buat Akun</string>
-    <string name="title2">Masukkan data untuk membuat akun</string>
+    <string name="title_reg1">Buat Akun</string>
+    <string name="title_reg2">Masukkan data untuk membuat akun</string>
+    <string name="title_log1">Masuk</string>
+    <string name="title_log2">Masukkan email dan kata sandi</string>
     <string name="hint_name">Nama</string>
     <string name="hint_email">Email</string>
     <string name="hint_no">No Telepon</string>
@@ -17,6 +19,12 @@
     <string name="confirm">Dengan melanjutkan, Anda menyetujui Persyaratan Layanan kami dan Kebijakan Privasi</string>
     <string name="join">Bergabung</string>
     <string name="or_join">------ Atau bergabung dengan ------</string>
+    <string name="or_login">------ Atau masuk dengan ------</string>
+    <string name="have_account">Sudah punya akun?</string>
+    <string name="login_here">Masuk disini</string>
+    <string name="forgot_pass">Lupa Password?</string>
+    <string name="dont_have_account">Belum punya akun?</string>
+    <string name="join_here">Daftar disini</string>
 
     //Home
     <string name="search_hint">Cari cara daur ulang sampah</string>
