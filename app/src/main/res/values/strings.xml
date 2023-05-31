@@ -6,6 +6,19 @@
     <string name="title_location">Lokasi</string>
     <string name="title_profile">Profile</string>
 
+    //Auth
+    <string name="title1">Buat Akun</string>
+    <string name="title2">Masukkan data untuk membuat akun</string>
+    <string name="hint_name">Nama</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_no">No Telepon</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confpass">Konfirmasi Password</string>
+    <string name="confirm">Dengan melanjutkan, Anda menyetujui Persyaratan Layanan kami dan Kebijakan Privasi</string>
+    <string name="join">Bergabung</string>
+    <string name="or_join">------ Atau bergabung dengan ------</string>
+
+    //Home
     <string name="search_hint">Cari cara daur ulang sampah</string>
     <string name="bs_button">Dimana Bank Sampah Terdekat Saya?</string>
     <string name="du_button">Bagaimana Cara Mendaur Ulang Sampah Saya?</string>
