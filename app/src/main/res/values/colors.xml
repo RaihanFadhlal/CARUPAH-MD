@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="transparan">#</color>
+
     <color name="I800">#FF000000</color>
     <color name="I400">#7C7C7C</color>
     <color name="I200">#D8D8D8</color>

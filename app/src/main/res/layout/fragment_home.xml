@@ -33,15 +33,18 @@
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="350dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:queryHint="@string/search_hint"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/search_bg"
+        android:queryBackground="@color/transparan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_home" >
-    </SearchView>
+        app:layout_constraintTop_toBottomOf="@+id/text_home" />
 
     <FrameLayout
         android:id="@+id/bs_button"
