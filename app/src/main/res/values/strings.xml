@@ -49,6 +49,13 @@
     <string name="rec_desc">Deskripsi</string>
     <string name="rec_author">Nama Penulis</string>
 
+    //Detect
+    <string name="img_detect">Deteksi Gambar</string>
+    <string name="det_title">Kenali Jenis Sampah Anda</string>
+    <string name="choose">Pilih Gambar</string>
+    <string name="take_pict">Ambil Foto</string>
+    <string name="take_gal">Ambil dari gallery</string>
+
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
