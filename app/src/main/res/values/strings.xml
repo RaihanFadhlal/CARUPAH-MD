@@ -31,6 +31,24 @@
     <string name="bs_button">Dimana Bank Sampah Terdekat Saya?</string>
     <string name="du_button">Bagaimana Cara Mendaur Ulang Sampah Saya?</string>
     <string name="track_rv">Tracking Pengelolaan Sampah Ku</string>
+    <string name="searchBS_hint">Cari Bank Sampah Terdekat</string>
+    <string name="recycle">Daur Ulang</string>
+    <string name="bank_sampah">Bank Sampah</string>
+
+    //BankSampah
+    <string name="bs_name">Nama Bank Sampah</string>
+    <string name="bs_desc">Deskripsi </string>
+    <string name="bs_address">Alamat </string>
+    <string name="bs_open">Jam buka</string>
+    <string name="bs_phone">Nomor Telepon</string>
+    <string name="bs_link_add">Link Alamat</string>
+    <string name="bs_link_wa">Link Whatsapp</string>
+
+    //DaurUlang
+    <string name="rec_name">Judul Daur Ulang</string>
+    <string name="rec_desc">Deskripsi</string>
+    <string name="rec_author">Nama Penulis</string>
+
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
