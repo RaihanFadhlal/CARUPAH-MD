@@ -1,22 +1,218 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
+    tools:context=".ui.detection.ResultFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/P200"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_profile"
-        android:layout_width="match_parent"
+        android:id="@+id/profilePage"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="260dp"
+        android:fontFamily="@font/worksans_medium"
+        android:text="@string/title_profile"
+        android:textColor="@color/P800"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/carupah_logo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="120dp"
+        android:src="@drawable/carupah_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/myAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="260dp"
+        android:text="@string/my_account"
+        android:fontFamily="@font/worksans_medium"
+        android:textColor="@color/I800"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePage" />
+
+    <ImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myAccount"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/myName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/my_name"
+        android:fontFamily="@font/worksans_medium"
+        android:textColor="@color/I800"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
+
+    <FrameLayout
+        android:id="@+id/changeProfile"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myName">
+
+        <ImageView
+            android:id="@+id/profileIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_account" />
+
+        <TextView
+            android:id="@+id/changeProfText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="86dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/worksans_medium"
+            android:textColor="@color/I800"
+            android:text="@string/change_prof" />
+
+        <ImageView
+            android:id="@+id/nextChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_next" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/changePass"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeProfile">
+
+        <ImageView
+            android:id="@+id/passIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_lock" />
+
+        <TextView
+            android:id="@+id/changePassText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="86dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/worksans_medium"
+            android:textColor="@color/I800"
+            android:text="@string/change_pass" />
+
+        <ImageView
+            android:id="@+id/nextChangePass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_next" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/regisBs"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changePass">
+
+        <ImageView
+            android:id="@+id/bsIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_bs" />
+
+        <TextView
+            android:id="@+id/regisBsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="86dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/worksans_medium"
+            android:textColor="@color/I800"
+            android:text="@string/regis_bs" />
+
+        <ImageView
+            android:id="@+id/nextBs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_next" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/logoutAcc"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regisBs">
+
+        <ImageView
+            android:id="@+id/logoutIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_logout" />
+
+        <TextView
+            android:id="@+id/logoutText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="86dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/worksans_medium"
+            android:textColor="@color/I800"
+            android:text="@string/logout" />
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
