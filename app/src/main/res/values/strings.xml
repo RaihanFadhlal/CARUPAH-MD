@@ -59,12 +59,18 @@
     <string name="class_resul">Hasil Klasifikasi</string>
     <string name="waste_result">Jenis Sampah</string>
     <string name="diy_idea">Ide DIY</string>
+
+    //Profile
     <string name="my_account">Akun Saya</string>
     <string name="my_name">Nama</string>
     <string name="change_prof">Ubah Profil</string>
     <string name="change_pass">Ubah Kata Sandi</string>
     <string name="regis_bs">Daftar Menjadi Bank Sampah</string>
     <string name="logout">Log Out</string>
+    <string name="city">Kota/Kabupaten</string>
+    <string name="subdistrict">Kecamatan</string>
+    <string name="village">Desa/ Kelurahan</string>
+    <string name="Address">Alamat</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
