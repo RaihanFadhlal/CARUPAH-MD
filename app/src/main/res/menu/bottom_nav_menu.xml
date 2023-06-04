@@ -12,6 +12,11 @@
         android:title="@string/title_detect" />
 
     <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/carup_logo"
+        android:title="@string/carupai" />
+
+    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_location"
         android:title="@string/title_location" />

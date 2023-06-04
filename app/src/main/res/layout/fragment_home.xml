@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/P200"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageView
+            android:id="@+id/bell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="340dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/bell" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/text_home"
         android:layout_width="wrap_content"
@@ -49,13 +70,13 @@
         app:layout_constraintTop_toBottomOf="@+id/text_home" />
 
     <FrameLayout
-        android:id="@+id/bs_button"
+        android:id="@+id/coin_button"
         android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/blue_bg"
+        android:background="@drawable/green_bg2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView">
@@ -63,21 +84,92 @@
         <ImageView
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:src="@drawable/banksampah_logo"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/coin" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/worksans_medium"
+            android:text="@string/coin"
+            android:textColor="@color/I50"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/coinBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="48dp"
+            android:textColor="@color/I50"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/worksans_medium"
+            android:text="@string/balance" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/search_bg"
+            android:backgroundTint="@color/I50"
+            android:fontFamily="@font/worksans_medium"
+            android:text="@string/exchange"
+            android:textColor="@color/S500"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/exploreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="45dp"
+        android:fontFamily="@font/worksans_medium"
+        android:text="@string/explore"
+        android:textColor="@color/I800"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coin_button" />
+
+    <FrameLayout
+        android:id="@+id/bs_button"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/blue_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exploreText">
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/banksampah_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
             android:fontFamily="@font/worksans_medium"
             android:text="@string/bs_button"
-            android:textStyle="bold"
+            android:textColor="@color/I50"
             android:textSize="15sp"
-            android:textColor="@color/I800"
-            android:layout_marginStart="130dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginTop="30dp"/>
+            android:textStyle="bold" />
     </FrameLayout>
 
     <FrameLayout
@@ -87,7 +179,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/bg_green"
+        android:background="@drawable/green_bg3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bs_button">
@@ -106,45 +198,26 @@
             android:text="@string/du_button"
             android:textStyle="bold"
             android:textSize="15sp"
-            android:textColor="@color/I800"
+            android:textColor="@color/I50"
             android:layout_marginStart="130dp"
             android:layout_marginEnd="30dp"
             android:layout_marginTop="30dp"/>
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/track"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/historyButton"
         android:layout_width="350dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="30dp"
-        android:background="@color/I200"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/worksans_medium"
+        android:text="@string/waste_activity"
+        android:textColor="@color/I800"
+        android:textSize="14sp"
+        android:backgroundTint="@color/I50"
+        android:drawableEnd="@drawable/ic_next"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/du_button">
-
-        <TextView
-            android:id="@+id/track_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/worksans_medium"
-            android:text="@string/track_rv"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:textColor="@color/I800"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_history"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="45dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/track_text" />
-    </FrameLayout>
-
+        app:layout_constraintTop_toBottomOf="@+id/du_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

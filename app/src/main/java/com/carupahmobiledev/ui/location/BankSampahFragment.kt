@@ -1,4 +1,4 @@
-package com.carupahmobiledev.ui.home
+package com.carupahmobiledev.ui.location
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
