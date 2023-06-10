@@ -68,6 +68,7 @@
     <string name="class_resul">Hasil Klasifikasi</string>
     <string name="waste_result">Jenis Sampah</string>
     <string name="diy_idea">Ide DIY</string>
+    <string name="imageTaken">Hasil Gambar</string>
 
     //CarupAI
     <string name="carupai">CarupAI</string>

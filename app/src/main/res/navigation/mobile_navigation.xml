@@ -28,11 +28,7 @@
         android:id="@+id/navigation_detect"
         android:name="com.carupahmobiledev.ui.detection.DetectFragment"
         android:label="@string/title_detect"
-        tools:layout="@layout/fragment_detect" >
-        <action
-            android:id="@+id/action_navigation_detect_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_detect" />
 
     <fragment
         android:id="@+id/navigation_chat"
@@ -51,9 +47,4 @@
         android:name="com.carupahmobiledev.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/cameraFragment"
-        android:name="com.carupahmobiledev.ui.detection.CameraFragment"
-        android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
 </navigation>

@@ -2,6 +2,7 @@ package com.carupahmobiledev.ui.detection
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -11,11 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.carupahmobiledev.R
 import com.carupahmobiledev.databinding.FragmentDetectBinding
 import java.io.File
 import java.io.FileOutputStream
@@ -23,12 +24,8 @@ import java.io.FileOutputStream
 class DetectFragment : Fragment() {
     private lateinit var detectFragmentBinding: FragmentDetectBinding
     private lateinit var detectViewModel: DetectViewModel
-    private lateinit var launcherIntentCameraX: ActivityResultLauncher<Intent>
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         detectFragmentBinding = FragmentDetectBinding.inflate(inflater, container, false)
         detectViewModel = ViewModelProvider(this)[DetectViewModel::class.java]
         return detectFragmentBinding.root
@@ -36,47 +33,63 @@ class DetectFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requestPermissions()
-        launcherIntentCameraX = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == CAMERA_X_RESULT) {
-                val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    result.data?.getSerializableExtra("picture", File::class.java)
-                } else {
-                    @Suppress("DEPRECATION")
-                    result.data?.getSerializableExtra("picture")
-                } as? File
-
-                val isBackCamera = result.data?.getBooleanExtra("isBackCamera", true) as Boolean
-
-                myFile?.let { file ->
-                    rotateFile(file, isBackCamera)
-                }
-            }
+        if (!allPermissionsGranted()) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
+            )
         }
+
         detectFragmentBinding.useCam.setOnClickListener { startCameraX() }
     }
-
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            if (permissions.all { it.value }) {
-            } else {
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        @Suppress("DEPRECATION")
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (!allPermissionsGranted()) {
                 Toast.makeText(
-                    requireContext(),
+                    requireActivity(),
                     "Tidak mendapatkan permission.",
                     Toast.LENGTH_SHORT
                 ).show()
+                requireActivity().finish()
             }
         }
-    private fun requestPermissions() {
-        requestPermissionLauncher.launch(REQUIRED_PERMISSIONS)
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun startCameraX() {
-        childFragmentManager.beginTransaction()
-            .replace(R.id.camContainer, CameraFragment())
-            .commit()
+        val intent = Intent(requireActivity(), CameraActivity::class.java)
+        launcherIntentCameraX.launch(intent)
+    }
+
+    private val launcherIntentCameraX = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == CAMERA_X_RESULT) {
+            val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                it.data?.getSerializableExtra("picture", File::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                it.data?.getSerializableExtra("picture")
+            } as? File
+
+            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
+
+            myFile?.let { file ->
+                rotateFile(file, isBackCamera)
+                detectFragmentBinding.imgPreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
+            }
+        }
     }
 
     private fun rotateFile(file: File, isBackCamera: Boolean = false) {
@@ -94,7 +107,7 @@ class DetectFragment : Fragment() {
     companion object {
         const val CAMERA_X_RESULT = 200
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val REQUEST_CODE_PERMISSIONS = 10
     }
 
 }
-

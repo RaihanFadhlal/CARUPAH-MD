@@ -1,14 +1,14 @@
 package com.carupahmobiledev.ui.detection
 
-import android.content.Context
+import android.app.Application
 import android.content.Intent
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Size
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -16,40 +16,32 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.carupahmobiledev.R
-import com.carupahmobiledev.databinding.FragmentCameraBinding
+import com.carupahmobiledev.databinding.ActivityCameraBinding
 import java.io.File
+import java.nio.file.Files.createFile
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CameraFragment : Fragment() {
-    private lateinit var binding: FragmentCameraBinding
+class CameraActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCameraBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
 
-    private val filenameFormat = "dd-MMM-yyyy"
-    private val timeStamp: String = SimpleDateFormat(filenameFormat, Locale.US).format(System.currentTimeMillis())
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentCameraBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding = ActivityCameraBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.captureImage.setOnClickListener { takePhoto() }
         binding.switchCam.setOnClickListener {
-            cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
+            cameraSelector = if (cameraSelector.equals(CameraSelector.DEFAULT_BACK_CAMERA)) CameraSelector.DEFAULT_FRONT_CAMERA
             else CameraSelector.DEFAULT_BACK_CAMERA
             startCamera()
         }
     }
 
-    override fun onResume() {
+    public override fun onResume() {
         super.onResume()
         hideSystemUI()
         startCamera()
@@ -58,16 +50,16 @@ class CameraFragment : Fragment() {
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
 
-        val photoFile = createFile(requireContext().applicationContext)
+        val photoFile = createFile(application)
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
         imageCapture.takePicture(
             outputOptions,
-            ContextCompat.getMainExecutor(requireContext()),
+            ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
                     Toast.makeText(
-                        requireContext(),
+                        this@CameraActivity,
                         "Gagal mengambil gambar.",
                         Toast.LENGTH_SHORT
                     ).show()
@@ -80,15 +72,34 @@ class CameraFragment : Fragment() {
                         "isBackCamera",
                         cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
                     )
-                    requireActivity().setResult(DetectFragment.CAMERA_X_RESULT, intent)
-                    requireActivity().finish()
+                    setResult(DetectFragment.CAMERA_X_RESULT, intent)
+                    finish()
                 }
             }
         )
     }
 
+    private fun createFile(application: Application): File {
+        val mediaDir = application.externalMediaDirs.firstOrNull()?.let {
+            File(it, application.resources.getString(R.string.app_name)).apply { mkdirs() }
+        }
+
+        val outputDirectory = if (
+            mediaDir != null && mediaDir.exists()
+        ) mediaDir else application.filesDir
+
+        return File(outputDirectory, "$timeStamp.jpg")
+    }
+
+    private val timeStamp: String = SimpleDateFormat(
+        FILENAME_FORMAT,
+        Locale.US
+    ).format(System.currentTimeMillis())
+
+
     private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
         cameraProviderFuture.addListener({
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -111,36 +122,28 @@ class CameraFragment : Fragment() {
 
             } catch (exc: Exception) {
                 Toast.makeText(
-                    requireContext(),
+                    this@CameraActivity,
                     "Gagal memunculkan kamera.",
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        }, ContextCompat.getMainExecutor(requireContext()))
+        }, ContextCompat.getMainExecutor(this))
     }
 
-    @Suppress("DEPRECATION")
     private fun hideSystemUI() {
+        @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
-            requireActivity().window.setFlags(
+            window.setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+        supportActionBar?.hide()
     }
 
-    @Suppress("DEPRECATION")
-    private fun createFile(context: Context): File {
-        val mediaDir = context.externalMediaDirs.firstOrNull()?.let {
-            File(it, context.resources.getString(R.string.app_name)).apply { mkdirs() }
-        }
-
-        val outputDirectory = if (mediaDir != null && mediaDir.exists())
-            mediaDir else context.filesDir
-
-        return File(outputDirectory, "$timeStamp.jpg")
+    companion object {
+        private const val FILENAME_FORMAT = "dd-MMM-yyyy"
     }
 }
