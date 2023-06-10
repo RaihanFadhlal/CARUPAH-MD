@@ -14,6 +14,9 @@
             android:id="@+id/action_navigation_home_to_navigation_profile"
             app:destination="@id/navigation_profile" />
         <action
+            android:id="@+id/action_navigation_home_to_navigation_chat"
+            app:destination="@id/navigation_chat" />
+        <action
             android:id="@+id/action_navigation_home_to_navigation_notifications"
             app:destination="@id/navigation_notifications" />
         <action
@@ -25,7 +28,17 @@
         android:id="@+id/navigation_detect"
         android:name="com.carupahmobiledev.ui.detection.DetectFragment"
         android:label="@string/title_detect"
-        tools:layout="@layout/fragment_detect" />
+        tools:layout="@layout/fragment_detect" >
+        <action
+            android:id="@+id/action_navigation_detect_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="com.carupahmobiledev.ui.chatbot.CarupAIFragment"
+        android:label="@string/carupai"
+        tools:layout="@layout/fragment_carup_a_i"/>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -38,4 +51,9 @@
         android:name="com.carupahmobiledev.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.carupahmobiledev.ui.detection.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
 </navigation>

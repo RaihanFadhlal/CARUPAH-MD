@@ -57,7 +57,7 @@
         android:textAllCaps="false"
         android:textColor="@color/I800"
         android:textSize="14sp"
-        android:background=""
+        android:background="@color/I50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carupah_logo" />

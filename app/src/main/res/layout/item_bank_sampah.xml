@@ -15,7 +15,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="8dp">
 
         <ImageView
@@ -38,9 +38,9 @@
             android:layout_toEndOf="@id/img_bs"
             android:fontFamily="@font/worksans_medium"
             android:text="@string/bank_sampah"
+            android:textColor="@color/I800"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:textColor="@color/I800"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -98,21 +98,24 @@
 
         <Button
             android:id="@+id/buttonMsg"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/ic_msg"
+            android:contentDescription="@string/bs_link_wa"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toEndOf="@id/buttonLoc"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/buttonLoc"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="190dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="180dp"
             android:background="@drawable/ic_loc"
+            android:contentDescription="@string/Address"
+            card_view:layout_constraintBottom_toTopOf="@+id/desc_bs"
             card_view:layout_constraintStart_toEndOf="@+id/name_bs"
             card_view:layout_constraintTop_toTopOf="parent" />
 

@@ -89,7 +89,6 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="55dp"
-        android:cornerRadius="5"
         android:text="@string/title_log1"
         android:textColor="@color/I50"
         app:cornerRadius="16dp"

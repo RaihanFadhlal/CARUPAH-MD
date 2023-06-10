@@ -40,9 +40,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="250dp"
-        android:background=""
         android:contentDescription="@string/back"
         android:drawableStart="@drawable/ic_back"
+        android:background="@color/I50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +94,6 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:cornerRadius="5"
         android:text="@string/change_pass"
         android:textColor="@color/I50"
         app:cornerRadius="16dp"

@@ -72,6 +72,7 @@
     //CarupAI
     <string name="carupai">CarupAI</string>
     <string name="ask">Silahkan Bertanya</string>
+    <string name="send">Kirim</string>
 
     //Profile
     <string name="my_account">Akun Saya</string>
