@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "967756732934",
+    "project_id": "carupah-871dd",
+    "storage_bucket": "carupah-871dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967756732934:android:2af59a2aa52d2ef0054187",
+        "android_client_info": {
+          "package_name": "com.carupahmobiledev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967756732934-k0aqrn7chtnoh72j9iqn5d23j6bvj75s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgm-BP0OKLaMhYLec5s-LAICZEMJi1tpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967756732934-0d06ehhiuas0i465p3etetbba3gtk443.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,42 +1,50 @@
 package com.carupahmobiledev.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.carupahmobiledev.R
+import com.carupahmobiledev.databinding.FragmentDetectBinding
 import com.carupahmobiledev.databinding.FragmentProfileBinding
+import com.carupahmobiledev.ui.auth.LoginActivity
+import com.carupahmobiledev.ui.detection.DetectViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentProfileBinding? = null
+    private lateinit var binding: FragmentProfileBinding
+    private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var auth: FirebaseAuth
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
-
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.changePassText
-        profileViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentProfileBinding.inflate(layoutInflater)
+
+        auth = Firebase.auth
+        val firebaseUser = auth.currentUser
+        if (firebaseUser == null) {
+            // Not signed in, launch the Login activity
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            requireActivity().finish()
+            return
+        }
+        binding.logoutAcc.setOnClickListener { signOut()}
+    }
+
+    private fun signOut() {
+        auth.signOut()
+        startActivity(Intent(requireActivity(), LoginActivity::class.java))
+        requireActivity().finish()
     }
 }

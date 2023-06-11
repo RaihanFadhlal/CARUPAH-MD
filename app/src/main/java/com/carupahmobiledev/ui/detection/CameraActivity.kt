@@ -91,12 +91,6 @@ class CameraActivity : AppCompatActivity() {
         return File(outputDirectory, "$timeStamp.jpg")
     }
 
-    private val timeStamp: String = SimpleDateFormat(
-        FILENAME_FORMAT,
-        Locale.US
-    ).format(System.currentTimeMillis())
-
-
     private fun startCamera() {
 
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -145,5 +139,10 @@ class CameraActivity : AppCompatActivity() {
 
     companion object {
         private const val FILENAME_FORMAT = "dd-MMM-yyyy"
+        val timeStamp: String = SimpleDateFormat(
+            FILENAME_FORMAT,
+            Locale.US
+        ).format(System.currentTimeMillis())
+
     }
 }
