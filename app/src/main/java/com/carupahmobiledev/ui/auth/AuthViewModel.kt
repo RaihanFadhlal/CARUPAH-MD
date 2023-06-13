@@ -2,7 +2,7 @@ package com.carupahmobiledev.ui.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.carupahmobiledev.data.remote.response.LoginResult
+import com.carupahmobiledev.data.remote.response.LoginResponse
 import com.carupahmobiledev.data.remote.response.RegisterResponse
 import com.carupahmobiledev.data.repo.AuthRepo
 import com.carupahmobiledev.util.Event
@@ -20,7 +20,7 @@ class AuthViewModel @Inject constructor(
     val logMessage: LiveData<Event<String>>
         get() = authRepo.logMessage
 
-    val loginUser: LiveData<LoginResult> = authRepo.loginUser
+    val loginUser: LiveData<LoginResponse> = authRepo.loginUser
     val registerUser: LiveData<RegisterResponse> = authRepo.registerUser
     val isLoading: LiveData<Boolean> = authRepo.isLoading
 

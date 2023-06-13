@@ -9,3 +9,8 @@ data class RegisterBody (
     @SerializedName("confirm_pw") val confirm_pw: String,
     @SerializedName("numberPhone") val numberPhone : String
 )
+
+data class LoginBody (
+    @SerializedName("email") val email: String,
+    @SerializedName("password") val password: String
+)

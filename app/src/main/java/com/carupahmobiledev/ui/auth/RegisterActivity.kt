@@ -2,17 +2,17 @@ package com.carupahmobiledev.ui.auth
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.carupahmobiledev.R
 import com.carupahmobiledev.data.TokenPreferences
 import com.carupahmobiledev.data.repo.AuthRepo
 import com.carupahmobiledev.databinding.ActivityRegisterBinding
 import com.carupahmobiledev.util.ViewModelFactory
+import com.carupahmobiledev.util.showLoading
+import com.carupahmobiledev.util.showToast
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var regisBinding: ActivityRegisterBinding
@@ -24,7 +24,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         regisBinding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(regisBinding.root)
-
         supportActionBar?.hide()
 
         tokenPref = TokenPreferences(this)
@@ -64,10 +63,10 @@ class RegisterActivity : AppCompatActivity() {
                 regisBinding.inputConfPass.error = getString(R.string.must_filled)
             }
             password.length < 8 -> {
-                regisBinding.inputPass.error = getString(R.string.must_filled)
+                regisBinding.inputPass.error = getString(R.string.min_password)
             }
             !email.matches(emailPattern) -> {
-                regisBinding.inputEmail.error = getString(R.string.must_filled)
+                regisBinding.inputEmail.error = getString(R.string.not_matched)
             }
             else -> {
                 authViewModel.register(username, email, password, confirm_pw, numberPhone)
@@ -84,14 +83,6 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun showLoading(view: View, isLoading: Boolean) {
-        view.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
-
-    private fun showToast(context: Context, msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
     private fun setAnimation() {
         val title = ObjectAnimator.ofFloat(regisBinding.title1, View.ALPHA, 1f).setDuration(300)

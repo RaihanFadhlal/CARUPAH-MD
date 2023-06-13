@@ -29,6 +29,9 @@
     <string name="min_password">minimal 8 karakter!</string>
     <string name="email_taken">Email Sudah Digunakan!</string>
     <string name="succeed">Berhasil Bergabung!</string>
+    <string name="not_matched">Format Tidak Sesuai</string>
+    <string name="login_failed">Login Gagal</string>
+    <string name="login_succeed">Login Berhasil</string>
 
     //Home
     <string name="search_hint">Cari cara daur ulang sampah</string>

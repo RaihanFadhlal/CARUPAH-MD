@@ -2,13 +2,19 @@ package com.carupahmobiledev.ui.auth
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.carupahmobiledev.HomeActivity
 import com.carupahmobiledev.R
+import com.carupahmobiledev.data.TokenPreferences
+import com.carupahmobiledev.data.repo.AuthRepo
 import com.carupahmobiledev.databinding.ActivityLoginBinding
+import com.carupahmobiledev.util.ViewModelFactory
+import com.carupahmobiledev.util.showLoading
+import com.carupahmobiledev.util.showToast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -23,6 +29,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
+    private lateinit var tokenPref: TokenPreferences
+    private lateinit var authRepo: AuthRepo
+    private lateinit var authViewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,14 +39,16 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        // Configure Google Sign In
+        tokenPref = TokenPreferences(this)
+        authRepo = AuthRepo()
+        authViewModel = ViewModelProvider(this, ViewModelFactory(tokenPref, authRepo, this)) [AuthViewModel::class.java]
+
         val gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-        // Initialize Firebase Auth
         auth = Firebase.auth
 
         binding.loginGoogle.setOnClickListener {
@@ -46,8 +57,12 @@ class LoginActivity : AppCompatActivity() {
         binding.openReg.setOnClickListener {
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
+        binding.buttonLogin.setOnClickListener {
+            userLogin()
+        }
     }
 
+    // Login Google
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         resultLauncher.launch(signInIntent)
@@ -96,6 +111,41 @@ class LoginActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         updateUI(currentUser)
+    }
+
+    // Login Custom
+    private fun userLogin() {
+        val email = binding.inputEmailLog.text.toString().trim()
+        val password = binding.inputPassLog.text.toString().trim()
+
+        authViewModel.isLoading.observe(this) { isLoading ->
+            showLoading(binding.progressBar, isLoading)
+        }
+
+        when {
+            email.isEmpty() -> {
+                binding.inputEmailLog.error = getString(R.string.must_filled)
+            }
+            password.isEmpty() -> {
+                binding.inputPassLog.error = getString(R.string.must_filled)
+            }
+
+            !email.matches(RegisterActivity.emailPattern) -> {
+                binding.inputEmailLog.error = getString(R.string.not_matched)
+            }
+            else -> {
+                authViewModel.login(email, password)
+                authViewModel.logMessage.observe(this) {
+                    it.getContentIfNotHandled()?.let {
+                        showToast(this, getString(R.string.login_failed))
+                    }
+                }
+                authViewModel.loginUser.observe(this) { login ->
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    showToast(this, "${getString(R.string.login_succeed)} ${login.message}")
+                }
+            }
+        }
     }
 
     companion object {

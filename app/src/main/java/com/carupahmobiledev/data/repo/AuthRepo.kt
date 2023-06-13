@@ -3,9 +3,9 @@ package com.carupahmobiledev.data.repo
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.carupahmobiledev.data.remote.body.LoginBody
 import com.carupahmobiledev.data.remote.body.RegisterBody
 import com.carupahmobiledev.data.remote.response.LoginResponse
-import com.carupahmobiledev.data.remote.response.LoginResult
 import com.carupahmobiledev.data.remote.response.RegisterResponse
 import com.carupahmobiledev.data.remote.retrofit.ApiConfig
 import com.carupahmobiledev.util.Event
@@ -19,8 +19,8 @@ class AuthRepo {
     private val _registerUser = MutableLiveData<RegisterResponse>()
     val registerUser: LiveData<RegisterResponse> = _registerUser
 
-    private val _loginUser = MutableLiveData<LoginResult>()
-    val loginUser: LiveData<LoginResult> = _loginUser
+    private val _loginUser = MutableLiveData<LoginResponse>()
+    val loginUser: LiveData<LoginResponse> = _loginUser
 
     private val _isEnabled = MutableLiveData<Boolean>()
 
@@ -65,10 +65,11 @@ class AuthRepo {
     fun login(email: String, password: String): LiveData<LoginResponse> {
         _isEnabled.value = false
         _isLoading.value = true
+        val body = LoginBody(email, password)
 
         Log.e(TAG, "The Result is $email")
 
-        ApiConfig.getApiService().login(email, password)
+        ApiConfig.getApiService().login(body)
             .enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(
                     call: Call<LoginResponse>,
@@ -77,11 +78,8 @@ class AuthRepo {
                     _isEnabled.value = true
                     _isLoading.value = false
                     if (response.isSuccessful) {
-                        response.body().let { login ->
-                            login?.loginResult?.let {
-                                _loginUser.value = LoginResult(it.name, it.userId, it.token)
-                            }
-                        }
+                        _loginUser.postValue(response.body())
+
                     } else {
                         Log.e(TAG, "onFailure: ${response.message()}")
                         _logMessage.value = Event("")
