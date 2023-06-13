@@ -43,6 +43,9 @@ class LoginActivity : AppCompatActivity() {
         binding.loginGoogle.setOnClickListener {
             signIn()
         }
+        binding.openReg.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+        }
     }
 
     private fun signIn() {

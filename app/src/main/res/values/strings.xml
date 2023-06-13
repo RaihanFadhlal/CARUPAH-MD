@@ -25,6 +25,10 @@
     <string name="forgot_pass">Lupa Password?</string>
     <string name="dont_have_account">Belum punya akun?</string>
     <string name="join_here">Daftar disini</string>
+    <string name="must_filled">Tidak Boleh Kosong!</string>
+    <string name="min_password">minimal 8 karakter!</string>
+    <string name="email_taken">Email Sudah Digunakan!</string>
+    <string name="succeed">Berhasil Bergabung!</string>
 
     //Home
     <string name="search_hint">Cari cara daur ulang sampah</string>
