@@ -17,8 +17,8 @@
         android:id="@+id/action_navigation_home_to_navigation_chat"
         app:destination="@id/navigation_chat" />
     <action
-        android:id="@+id/action_navigation_home_to_navigation_notifications"
-        app:destination="@id/navigation_notifications" />
+        android:id="@+id/action_navigation_home_to_navigation_location"
+        app:destination="@id/navigation_location" />
     <action
         android:id="@+id/action_navigation_home_to_navigation_detect"
         app:destination="@id/navigation_detect" />
@@ -38,7 +38,7 @@
         tools:layout="@layout/fragment_carup_a_i"/>
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_location"
         android:name="com.carupahmobiledev.ui.location.LocationFragment"
         android:label="@string/title_location"
         tools:layout="@layout/fragment_location" />

@@ -31,8 +31,12 @@ class HomeActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_detect, R.id.navigation_chat, R.id.navigation_notifications, R.id.navigation_profile
-            ).build()
+            R.id.navigation_home,
+            R.id.navigation_detect,
+            R.id.navigation_chat,
+            R.id.navigation_location,
+            R.id.navigation_profile
+        ).build()
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -44,4 +48,8 @@ class HomeActivity : AppCompatActivity() {
         Intent(this, LoginActivity::class.java).also { startActivity(it) }
     }
 
+    fun moveToLocationFragment() {
+        val navController = findNavController(R.id.nav_host_fragment)
+        navController.navigate(R.id.navigation_location)
+    }
 }

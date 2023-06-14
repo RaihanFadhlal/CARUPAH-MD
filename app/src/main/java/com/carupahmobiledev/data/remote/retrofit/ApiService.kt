@@ -17,4 +17,10 @@ interface ApiService {
     fun register(
         @Body bodyRegister : RegisterBody
     ): Call<RegisterResponse>
+
+    @POST("detect")
+    fun detect(
+        @Body bodyRegister : RegisterBody
+    ): Call<RegisterResponse>
+
 }
