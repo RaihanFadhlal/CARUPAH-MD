@@ -1,6 +1,6 @@
 # CARUPAH-MD
 Mobile Development part of CARUPAH Project (C23-PS062)
-A mobile  app to provide real time chat with other people who have a similar interest in learning other languages. This app have several features such as user matching, chat filtering, chat assistant, and peer correction.
+A mobile application to help people identify the type of waste, explain how the trash can be recycled, and connect the person with the nearest waste bank willing to buy the waste.
 
 ## Android Tech Used 
 1. Kotlin
