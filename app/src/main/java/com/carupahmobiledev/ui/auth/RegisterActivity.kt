@@ -2,12 +2,15 @@ package com.carupahmobiledev.ui.auth
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import com.carupahmobiledev.HomeActivity
 import com.carupahmobiledev.R
 import com.carupahmobiledev.data.TokenPreferences
+import com.carupahmobiledev.data.remote.response.Data
 import com.carupahmobiledev.data.repo.AuthRepo
 import com.carupahmobiledev.databinding.ActivityRegisterBinding
 import com.carupahmobiledev.util.ViewModelFactory
@@ -19,6 +22,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var tokenPref: TokenPreferences
     private lateinit var authRepo: AuthRepo
     private lateinit var authViewModel: AuthViewModel
+    private lateinit var id : Data
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +81,9 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 authViewModel.registerUser.observe(this) { register ->
                     if (register != null) {
+                        val id = register.data.uid
+                        val intent = Intent(this, HomeActivity::class.java)
+                        intent.putExtra("ID", id)
                         finish()
                         showToast(this, getString(R.string.succeed))
                     }

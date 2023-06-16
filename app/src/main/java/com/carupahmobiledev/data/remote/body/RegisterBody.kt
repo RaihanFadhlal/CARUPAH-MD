@@ -9,8 +9,16 @@ data class RegisterBody (
     @SerializedName("confirm_pw") val confirm_pw: String,
     @SerializedName("numberPhone") val numberPhone : String
 )
-
 data class LoginBody (
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String
+)
+
+data class EditBody (
+    @SerializedName("name") val name: String,
+    @SerializedName("numberPhone") val numberPhone: String,
+    @SerializedName("city") val city: String,
+    @SerializedName("district") val district: String,
+    @SerializedName("subdistrict") val subdistrict: String,
+    @SerializedName("address") val address: String
 )

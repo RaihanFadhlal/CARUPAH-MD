@@ -92,7 +92,6 @@ class AuthRepo {
             })
         return login
     }
-
     companion object {
         private const val TAG = "AuthRepository"
     }

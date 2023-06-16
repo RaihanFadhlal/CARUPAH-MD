@@ -26,6 +26,9 @@
         <activity
             android:name=".SplashActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.detection.ResultActivity"
+            android:exported="false" />
 
         <activity
             android:name=".ui.auth.LoginActivity"

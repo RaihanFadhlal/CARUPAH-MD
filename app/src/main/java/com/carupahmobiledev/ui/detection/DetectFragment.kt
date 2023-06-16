@@ -1,17 +1,12 @@
 package com.carupahmobiledev.ui.detection
 
 import android.Manifest
-import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,21 +17,29 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.carupahmobiledev.R
+import com.carupahmobiledev.data.repo.AuthRepo
+import com.carupahmobiledev.data.repo.DetectRepo
 import com.carupahmobiledev.databinding.FragmentDetectBinding
-import com.carupahmobiledev.ui.detection.CameraActivity.Companion.timeStamp
-import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
+import com.carupahmobiledev.ui.auth.AuthViewModel
+import com.carupahmobiledev.ui.location.LocationViewModel
+import com.carupahmobiledev.util.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.*
 
 class DetectFragment : Fragment() {
-    private lateinit var detectFragmentBinding: FragmentDetectBinding
+    private lateinit var detectBinding: FragmentDetectBinding
     private lateinit var detectViewModel: DetectViewModel
+    private lateinit var detectRepo: DetectRepo
+    private var getFile: File? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        detectFragmentBinding = FragmentDetectBinding.inflate(inflater, container, false)
-        detectViewModel = ViewModelProvider(this)[DetectViewModel::class.java]
-        return detectFragmentBinding.root
+        detectBinding = FragmentDetectBinding.inflate(inflater, container, false)
+        detectRepo = DetectRepo()
+        detectViewModel = ViewModelProvider(requireActivity(), DetectViewModelFactory(detectRepo)) [DetectViewModel::class.java]
+        return detectBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,8 +51,12 @@ class DetectFragment : Fragment() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-        detectFragmentBinding.useCam.setOnClickListener { startCameraX() }
-        detectFragmentBinding.useGallery.setOnClickListener { startGallery() }
+
+        detectBinding.useCam.setOnClickListener { startCameraX() }
+        detectBinding.useGallery.setOnClickListener { startGallery() }
+        detectBinding.buttonDetect.setOnClickListener {
+            uploadImage()
+        }
     }
     @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
@@ -95,21 +102,10 @@ class DetectFragment : Fragment() {
 
             myFile?.let { file ->
                 rotateFile(file, isBackCamera)
-                detectFragmentBinding.imgPreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
+                detectBinding.imgPreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
             }
+            getFile = myFile
         }
-    }
-
-    private fun rotateFile(file: File, isBackCamera: Boolean = false) {
-        val matrix = Matrix()
-        val bitmap = BitmapFactory.decodeFile(file.path)
-        val rotation = if (isBackCamera) 90f else -90f
-        matrix.postRotate(rotation)
-        if (!isBackCamera) {
-            matrix.postScale(-1f, 1f, bitmap.width / 2f, bitmap.height / 2f)
-        }
-        val result = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-        result.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(file))
     }
 
     private fun startGallery() {
@@ -125,31 +121,29 @@ class DetectFragment : Fragment() {
     ) { result ->
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
             val selectedImg = result.data?.data as Uri
-            selectedImg.let { uri ->
-                uriToFile(uri, requireActivity())
-                detectFragmentBinding.imgPreview.setImageURI(uri)
-            }
+            val myFile = uriToFile(selectedImg, requireActivity())
+            getFile = myFile
+            detectBinding.imgPreview.setImageURI(selectedImg)
         }
     }
 
-    private fun uriToFile(selectedImg: Uri, context: Context): File {
-        val contentResolver: ContentResolver = context.contentResolver
-        val myFile = createCustomTempFile(context)
+    private fun uploadImage() {
+        if (getFile != null) {
+            val file = reduceFileImage(getFile as File)
+            val reqImage = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val imageMultiPart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                "photo", file.name, reqImage
+            )
+            detectViewModel.detectImg(imageMultiPart)
+            detectViewModel.detectImage.observe(requireActivity()){ response ->
+                val predictedClass = response.predicted_class
+                val intent = Intent(requireActivity(), ResultActivity::class.java)
+                intent.putExtra("result", predictedClass)
+                intent.putExtra("photo",getFile)
+                startActivity(intent)
+            }
 
-        val inputStream = contentResolver.openInputStream(selectedImg) as InputStream
-        val outputStream: OutputStream = FileOutputStream(myFile)
-        val buf = ByteArray(1024)
-        var len: Int
-        while (inputStream.read(buf).also { len = it } > 0) outputStream.write(buf, 0, len)
-        outputStream.close()
-        inputStream.close()
-
-        return myFile
-    }
-
-    private fun createCustomTempFile(context: Context): File {
-        val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(timeStamp, ".jpg", storageDir)
+        } else showToast(requireActivity(), getString(R.string.error))
     }
 
     companion object {

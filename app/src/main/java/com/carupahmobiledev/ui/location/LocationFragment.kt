@@ -15,7 +15,7 @@ class LocationFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         locationFragmentBinding = FragmentLocationBinding.inflate(inflater, container, false)
-        locationViewModel = ViewModelProvider(this)[LocationViewModel::class.java]
+        locationViewModel = ViewModelProvider(requireActivity())[LocationViewModel::class.java]
         return locationFragmentBinding.root
     }
 

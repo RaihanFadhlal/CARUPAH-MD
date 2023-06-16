@@ -1,34 +1,28 @@
 package com.carupahmobiledev.ui.detection
 
-import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
-import com.carupahmobiledev.R
-import com.carupahmobiledev.databinding.FragmentDetectBinding
-import com.carupahmobiledev.databinding.FragmentResultBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.carupahmobiledev.databinding.ActivityResultBinding
 import java.io.File
 
-class ResultFragment : Fragment() {
 
-    private lateinit var resultBinding: FragmentResultBinding
+class ResultActivity : AppCompatActivity() {
+
+    private lateinit var resultBinding: ActivityResultBinding
     private lateinit var detectViewModel: DetectViewModel
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        resultBinding = FragmentResultBinding.inflate(inflater, container, false)
-        return resultBinding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        resultBinding = ActivityResultBinding.inflate(layoutInflater)
+        setContentView(resultBinding.root)
 
-    fun displayImage(file: File?) {
-        if (file != null) {
-            resultBinding.imageResult.setImageBitmap(BitmapFactory.decodeFile(file.path))
-        }
-    }
+        val result = intent.getStringExtra("result")
+        resultBinding.resultText.text = result
 
+        val photo = intent.getStringExtra("photo") as File?
+        val imageView = resultBinding.imageResult
+        imageView.setImageURI(Uri.fromFile(photo))
+
+    }
 }

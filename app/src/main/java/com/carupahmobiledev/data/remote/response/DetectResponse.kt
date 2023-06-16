@@ -1,4 +1,10 @@
 package com.carupahmobiledev.data.remote.response
 
-class DetectResponse {
-}
+import com.google.gson.annotations.SerializedName
+
+data class DetectResponse(
+
+    @field:SerializedName("predicted_class")
+    val predicted_class: String
+
+)

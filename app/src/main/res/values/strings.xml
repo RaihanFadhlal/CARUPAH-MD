@@ -76,6 +76,7 @@
     <string name="waste_result">Jenis Sampah</string>
     <string name="diy_idea">Ide DIY</string>
     <string name="imageTaken">Hasil Gambar</string>
+    <string name="error">Gambar belum dipilih</string>
 
     //CarupAI
     <string name="carupai">CarupAI</string>
