@@ -1,6 +1,5 @@
 package com.carupahmobiledev.ui.home
 
-import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.carupahmobiledev.HomeActivity
-import com.carupahmobiledev.R
 import com.carupahmobiledev.databinding.FragmentHomeBinding
-import com.carupahmobiledev.ui.location.LocationFragment
 
 
 class HomeFragment : Fragment() {

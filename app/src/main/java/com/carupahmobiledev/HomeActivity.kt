@@ -2,7 +2,6 @@ package com.carupahmobiledev
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -28,6 +27,8 @@ class HomeActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        val uid = intent.getIntExtra("UID", 0)
+
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration.Builder(
@@ -40,10 +41,10 @@ class HomeActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
     fun signOut() {
-        Log.d("TAG", "dari fragmdpasm ")
         auth.signOut()
         Intent(this, LoginActivity::class.java).also { startActivity(it) }
     }

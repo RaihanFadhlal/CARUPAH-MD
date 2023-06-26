@@ -59,6 +59,7 @@
     <string name="bs_phone">Nomor Telepon</string>
     <string name="bs_link_add">Link Alamat</string>
     <string name="bs_link_wa">Link Whatsapp</string>
+    <string name="bs_email">Email</string>
 
     //DaurUlang
     <string name="rec_name">Judul Daur Ulang</string>

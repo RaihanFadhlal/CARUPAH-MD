@@ -33,9 +33,9 @@
 
     <fragment
         android:id="@+id/navigation_chat"
-        android:name="com.carupahmobiledev.ui.chatbot.CarupAIFragment"
+        android:name="com.carupahmobiledev.ui.chatbot.ChatbotFragment"
         android:label="@string/carupai"
-        tools:layout="@layout/fragment_carup_a_i"/>
+        tools:layout="@layout/fragment_chatbot"/>
 
     <fragment
         android:id="@+id/navigation_location"

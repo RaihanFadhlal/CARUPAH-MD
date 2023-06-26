@@ -18,11 +18,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.carupahmobiledev.R
-import com.carupahmobiledev.data.repo.AuthRepo
 import com.carupahmobiledev.data.repo.DetectRepo
 import com.carupahmobiledev.databinding.FragmentDetectBinding
-import com.carupahmobiledev.ui.auth.AuthViewModel
-import com.carupahmobiledev.ui.location.LocationViewModel
 import com.carupahmobiledev.util.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -132,14 +129,14 @@ class DetectFragment : Fragment() {
             val file = reduceFileImage(getFile as File)
             val reqImage = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val imageMultiPart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                "photo", file.name, reqImage
+                "file", file.name, reqImage
             )
             detectViewModel.detectImg(imageMultiPart)
             detectViewModel.detectImage.observe(requireActivity()){ response ->
                 val predictedClass = response.predicted_class
                 val intent = Intent(requireActivity(), ResultActivity::class.java)
                 intent.putExtra("result", predictedClass)
-                intent.putExtra("photo",getFile)
+                intent.putExtra("photo", getFile?.path)
                 startActivity(intent)
             }
 

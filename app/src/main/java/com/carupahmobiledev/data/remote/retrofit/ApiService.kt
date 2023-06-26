@@ -1,5 +1,6 @@
 package com.carupahmobiledev.data.remote.retrofit
 
+import com.carupahmobiledev.data.remote.body.ChatBody
 import com.carupahmobiledev.data.remote.body.EditBody
 import com.carupahmobiledev.data.remote.body.LoginBody
 import com.carupahmobiledev.data.remote.body.RegisterBody
@@ -36,10 +37,20 @@ interface ApiService {
         @Path("id") id: String,
         @Part image: MultipartBody.Part
     ): Call<UpdatePictureResponse>
+
     @Multipart
     @POST("predict")
     fun detectImg(
-        @Part image: MultipartBody.Part
+        @Part file: MultipartBody.Part
     ): Call<DetectResponse>
+
+    @POST("carupai")
+    fun sendChat(
+        @Body bodyChat : ChatBody
+    ): Call<ChatbotResponse>
+
+    @GET("/bank-sampah")
+    fun getBankSampahlist(
+    ): Call<List<BankSampahDetail>>
 
 }

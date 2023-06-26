@@ -3,13 +3,10 @@ package com.carupahmobiledev.ui.profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.carupahmobiledev.data.remote.body.EditBody
-import com.carupahmobiledev.data.remote.response.LoginResponse
 import com.carupahmobiledev.data.remote.response.ProfileResponse
-import com.carupahmobiledev.data.remote.response.RegisterResponse
 import com.carupahmobiledev.data.repo.ProfileRepo
 import com.carupahmobiledev.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.processNextEventInCurrentThread
 import javax.inject.Inject
 
 @HiltViewModel

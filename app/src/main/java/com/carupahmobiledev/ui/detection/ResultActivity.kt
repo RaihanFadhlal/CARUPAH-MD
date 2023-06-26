@@ -16,13 +16,14 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         resultBinding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(resultBinding.root)
+        supportActionBar?.hide()
 
         val result = intent.getStringExtra("result")
         resultBinding.resultText.text = result
 
-        val photo = intent.getStringExtra("photo") as File?
+        val photoPath = intent.getStringExtra("photo")
+        val photoFile = File(photoPath)
         val imageView = resultBinding.imageResult
-        imageView.setImageURI(Uri.fromFile(photo))
-
+        imageView.setImageURI(Uri.fromFile(photoFile))
     }
 }

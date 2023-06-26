@@ -22,3 +22,8 @@ data class EditBody (
     @SerializedName("subdistrict") val subdistrict: String,
     @SerializedName("address") val address: String
 )
+
+data class ChatBody (
+    @SerializedName("message") val message: String
+)
+

@@ -82,7 +82,7 @@ class RegisterActivity : AppCompatActivity() {
                 authViewModel.registerUser.observe(this) { register ->
                     if (register != null) {
                         val id = register.data.uid
-                        val intent = Intent(this, HomeActivity::class.java)
+                        val intent = Intent(this, LoginActivity::class.java)
                         intent.putExtra("ID", id)
                         finish()
                         showToast(this, getString(R.string.succeed))

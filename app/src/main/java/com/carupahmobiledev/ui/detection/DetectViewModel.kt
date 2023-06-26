@@ -25,5 +25,5 @@ class DetectViewModel @Inject constructor(
 
     val isLoading: LiveData<Boolean> = detectRepo.isLoading
 
-    fun detectImg(image: MultipartBody.Part) = detectRepo.detectImg(image)
+    fun detectImg(file: MultipartBody.Part) = detectRepo.detectImg(file)
 }

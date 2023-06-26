@@ -108,7 +108,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         updateUI(currentUser)
     }
@@ -141,7 +140,10 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
                 authViewModel.loginUser.observe(this) { login ->
-                    startActivity(Intent(this, HomeActivity::class.java))
+                    val uid = intent.getIntExtra("ID", 0)
+                    val intent = Intent(this, HomeActivity::class.java)
+                    intent.putExtra("UID", uid)
+                    startActivity(intent)
                     showToast(this, "${getString(R.string.login_succeed)} ${login.message}")
                 }
             }
