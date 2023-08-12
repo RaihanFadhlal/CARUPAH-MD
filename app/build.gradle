@@ -50,6 +50,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
     implementation 'androidx.navigation:navigation-fragment:2.6.0'
     implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
     androidTestImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
     implementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.2'

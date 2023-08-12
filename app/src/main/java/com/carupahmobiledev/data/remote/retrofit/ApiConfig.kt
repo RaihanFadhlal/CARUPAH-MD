@@ -1,6 +1,6 @@
 package com.carupahmobiledev.data.remote.retrofit
 
-import androidx.viewbinding.BuildConfig
+import com.carupahmobiledev.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,7 +20,7 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://34.128.86.162:8080/")
+                .baseUrl("http://34.101.62.59:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
@@ -39,7 +39,7 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://34.101.243.177:8080/")
+                .baseUrl("http://34.101.200.179:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
@@ -58,7 +58,7 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://34.101.82.202:8080/")
+                .baseUrl("http://34.101.68.236:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
